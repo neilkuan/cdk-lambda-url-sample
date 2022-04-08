@@ -1,7 +1,7 @@
+import * as path from 'path';
 import { App, Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
-import * as path from 'path';
 import { LambdaUrlfn } from './lambda-url';
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -10,11 +10,11 @@ export class MyStack extends Stack {
     const fn = new lambda.Function(this, 'LmdabaUrlFn', {
       code: lambda.Code.fromAsset(path.join(__dirname, './funs')),
       runtime: lambda.Runtime.PYTHON_3_9,
-      handler: 'func.handler'
+      handler: 'func.handler',
     });
 
     const urlFn = new LambdaUrlfn(this, 'MyLambdaFunctionUrl', {
-        lambdaFn: fn,
+      lambdaFn: fn,
     });
 
     new CfnOutput(this, 'LambdaUrl', {
